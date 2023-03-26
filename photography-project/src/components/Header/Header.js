@@ -1,16 +1,16 @@
+
 export const Header = () => {
     return (
-        <header class="nav-down responsive-nav hidden-lg hidden-md">
-        <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+        <header className="nav-down responsive-nav hidden-lg hidden-md">
+        <button type="button" id="nav-toggle" className="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
+            <span className="sr-only">Toggle navigation</span>
+            <span className="icon-bar"></span>
+            <span className="icon-bar"></span>
+            <span className="icon-bar"></span>
         </button>
-        
-        <div id="main-nav" class="collapse navbar-collapse">
+        <div id="main-nav" className="collapse navbar-collapse">
             <nav>
-                <ul class="nav navbar-nav">
+                <ul className="nav navbar-nav">
                     <li><a href="#top">Home</a></li>
                     <li><a href="#featured">Featured</a></li>
                     <li><a href="#projects">Recent Projects</a></li>
@@ -21,9 +21,5 @@ export const Header = () => {
             </nav>
         </div>
     </header>
-
-        
-
-
     )
 }
