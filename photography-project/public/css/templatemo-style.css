@@ -24,7 +24,7 @@ p {
 .content-section {
   padding-top: 80px;
   position: relative;
-  width: 80%;
+  width: 100%;
   display: inline-block;
   height: auto;
   left: 50%;
@@ -905,6 +905,23 @@ header {
 #contact button:hover {
   color: #232323;
   background-color: #f4f4f4;
+}
+
+/* Login & Register Style */
+
+.login-section {
+  padding-top: 80px;
+  position: relative;
+  width: 80%;
+  display: inline-block;
+  height: auto;
+  left: 50%;
+  text-align: center;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
 }
 
 

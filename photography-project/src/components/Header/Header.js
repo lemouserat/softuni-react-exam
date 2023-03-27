@@ -53,6 +53,12 @@ export const Header = () => {
                         <span class="circle"></span>
                         Register </Link>
                 </li>
+                <li>
+                    <Link to="/add-photo">
+                        <span class="rect"></span>
+                        <span class="circle"></span>
+                        Add photo </Link>
+                </li>
 
             </ul>
         </nav>
