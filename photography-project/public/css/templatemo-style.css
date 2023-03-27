@@ -24,7 +24,7 @@ p {
 .content-section {
   padding-top: 80px;
   position: relative;
-  width: 100%;
+  width: 80%;
   display: inline-block;
   height: auto;
   left: 50%;
@@ -181,7 +181,7 @@ header {
   float: left;
   height: 100%;
   position: fixed;
-  background-color: rgba(12,12,12,0.9);
+  background-color: rgba(12,12,12, 0.9);
   z-index: 10;
 }
 
@@ -337,11 +337,11 @@ header {
   z-index: 10;
   top: 50%;
   right: 60px;
-  -webkit-transform: translateY(-50%);
+  /* -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   -o-transform: translateY(-50%);
-  transform: translateY(-50%);
+  transform: translateY(-50%); */
   display: inline-block;
 }
 
@@ -428,8 +428,8 @@ header {
 .Modern-Slider .PrevArrow:before{content:'\f104';}
 
 .Modern-Slider .item .image {
-  animation: zoomin 12s ease-in-out infinite alternate;
-  -webkit-animation: zoomin 12s ease-in-out infinite alternate;
+  /* animation: zoomin 12s ease-in-out infinite alternate;
+  -webkit-animation: zoomin 12s ease-in-out infinite alternate; */
 }
 
 @keyframes zoomin {
@@ -918,6 +918,7 @@ header {
   display: inline-block;
   text-align: center;
   width: 100%;
+
 }
 
 .footer p {
