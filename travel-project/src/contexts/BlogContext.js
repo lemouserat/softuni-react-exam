@@ -32,10 +32,15 @@ export const BlogProvider = ({
         return blogs.find(blog => blog._id === blogId)
     }
 
+    const deleteBlog = (blogId) => {
+        return blogs.find(blog => blog._id === blogId)
+    }
+
     const contextValues = {
         blogs,
         onCreateBlogSubmit,
-        getBlog
+        getBlog,
+        deleteBlog
     }
 
     return (

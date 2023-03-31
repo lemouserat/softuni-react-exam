@@ -7,10 +7,11 @@ import { Register } from './Components/Register/Register';
 import { Login } from './Components/Login/Login';
 import { AddPhoto } from './Components/AddPhoto/AddPhoto';
 import { PhotoDetails } from './Components/PhotoDetails/PhotoDetails';
-import { Blog } from './Components/Blog/Blog';
+import { Blogs } from './Components/Blogs/Blogs';
 import { AddBlog } from './Components/AddBlog/AddBlog';
 import { AuthProvider } from './contexts/AuthContext';
 import { BlogProvider } from './contexts/BlogContext';
+import { BlogPostDetails } from './Components/BlogPostDetails.js/BlogPostDetails';
 
 function App() {
   return (
@@ -26,7 +27,8 @@ function App() {
                 <Route path='/register' element={<Register/>} /> 
                 <Route path='/add-photo' element={<AddPhoto/>} /> 
                 <Route path='/photo-details' element={<PhotoDetails/>} /> 
-                <Route path='/blogs' element={<Blog/>} /> 
+                <Route path='/blogs' element={<Blogs/>} /> 
+                <Route path='/blogs/:blogId' element={<BlogPostDetails />} />
                 <Route path='/add-blog' element={<AddBlog/>} /> 
                 </Routes> 
             </BlogProvider>

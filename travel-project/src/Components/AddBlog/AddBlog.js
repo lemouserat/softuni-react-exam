@@ -31,13 +31,12 @@ export const AddBlog = () => {
                     <div className="row">
                         <div className="col-md-6">
                           <fieldset>
-                            <input name="title" type="text" className="form-control" id="title" placeholder="Title..." required=""/>
                             <input name="title" type="text" className="form-control" id="title" placeholder="Title..." required="" value={values.title} onChange={changeHandler}/>
                           </fieldset>
                         </div>
                         <div className="col-md-6">
                           <fieldset>
-                            <input name="recommend" type="text" className="form-control" id="recommend" placeholder="recommend..." required=""/>
+                            <input name="recommend" type="text" className="form-control" id="recommend" placeholder="recommend..." value={values.recommend} onChange={changeHandler} required=""/>
                           </fieldset>
                         </div>
                         <div className="col-md-6">
@@ -47,17 +46,17 @@ export const AddBlog = () => {
                         </div>
                          <div className="col-md-6">
                           <fieldset>
-                            <input name="city" type="text" className="form-control" id="city" placeholder="City..." required=""/>
+                            <input name="city" type="text" className="form-control" id="city" placeholder="City..." value={values.city} onChange={changeHandler} required=""/>
                           </fieldset>
                         </div>
                         <div className="col-md-12">
                           <fieldset>
-                            <input name="blogPhotoUrl" type="text" className="form-control" id="blogPhotoUrl" placeholder="Photo url..." required=""/>
+                            <input name="blogPhotoUrl" type="text" className="form-control" id="blogPhotoUrl" placeholder="Photo url..." value={values.blogPhotoUrl} onChange={changeHandler} required=""/>
                           </fieldset>
                         </div>
                         <div className="col-md-12">
                           <fieldset>
-                            <textarea name="story" rows="3" className="form-control" id="story" placeholder="Share a short story with us..." ></textarea>
+                            <textarea name="story" rows="3" className="form-control" id="story" placeholder="Share a short story with us..." value={values.story} onChange={changeHandler} ></textarea>
                           </fieldset>
                         </div>
                         <div className="col-md-12">

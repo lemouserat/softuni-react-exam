@@ -25,14 +25,16 @@ export const blogServiceFactory = (token) => {
         const result = await request.post(baseUrl, blogData);
     
         console.log(result);
-    
         return result;
     };
+
+    const deleteBlog = (blogId) => request.delete(`${baseUrl}/${blogId}`)
 
 
     return {
         getAllBlogs,
         getOneBlog,
-        createBlog
+        createBlog,
+        delete: deleteBlog
     }
 }

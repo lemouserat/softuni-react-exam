@@ -1,15 +1,9 @@
 import { useBlogContext } from "../../contexts/BlogContext"
+import { BlogItem } from "./BlogItem"
 
-export const Blog = ({
-    _id,
-    title,
-    recommend,
-    country,
-    city,
-    blogPhotoUrl,
-}) => {
+export const Blogs = () => {
 
-    // const {blogs} = useBlogContext()
+     const {blogs} = useBlogContext()
 
 
     return (
@@ -30,21 +24,14 @@ export const Blog = ({
                     </ul>
                     <section id="first-tab-group" className="tabgroup">
                         <div id="tab1">
-                            <ul>
-                                <li>
-                                    <div className="item">
-                                        <img src={blogPhotoUrl} alt=""/>
-                                        <div className="text-content">
-                                            <h4>{title}</h4>
-                                            <span>25 July 2018</span>
-                                            <p>{country}</p>
-                                            <p>{city}</p>
-                                            <div className="accent-button button">
-                                                <a href="#contact">Continue Reading</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
+                            <ul>    
+                                {blogs.map(x => 
+                                    <BlogItem key={x._id} {...x} />
+                                    )}
+                                    
+                                            {blogs.length === 0 && (
+                                                <p >No articles yet</p>
+                                            )}
 
                             </ul>
                         </div>

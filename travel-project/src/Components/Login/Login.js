@@ -7,9 +7,7 @@ const LoginFormKeys = {
   Password: 'password'
 }
 
-
 export const Login = () => {
-
 
   const {onLoginSubmit} = useAuthContext();
   const {values, changeHandler, onSubmit} = useForm({
@@ -29,14 +27,16 @@ export const Login = () => {
                 
             </div>
             <div className="section-content">
-                <form id="login" method="post" onSubmit={onSubmit}>
+                <form id="login" method="POST" onSubmit={onSubmit}>
                     <div className="row">
                         <div className="col-md-8">
                           <fieldset>
                             <input 
-                              type="text" className="form-control" id="email" placeholder="Type in your email..." required=""
+                              type="text"  
+                              placeholder="Type in your email..."
                               name={LoginFormKeys.Email}
                               onChange={changeHandler}
+                              className="form-control" 
                               />
                           </fieldset>
                         </div>
@@ -44,10 +44,11 @@ export const Login = () => {
                         <div className="col-md-8">
                           <fieldset>
                             <input 
-                              type="password" className="form-control" id="password" placeholder="Type in your password..." required=""
+                              type="password" id="password" placeholder="Type in your password..." required=""
                               name={LoginFormKeys.Password}
                               value={values[LoginFormKeys.Password]}
                               onChange={changeHandler}
+                              className="form-control" 
                               />
                           </fieldset>
                         </div>
