@@ -1,11 +1,8 @@
 import { requestFactory } from "./requester";
 
-
 const baseUrl = 'http://localhost:3030/data/blogs'
 
-
 export const blogServiceFactory = (token) => {
-
     const request = requestFactory(token)
 
     const getAllBlogs = async () => {
@@ -28,6 +25,8 @@ export const blogServiceFactory = (token) => {
         return result;
     };
 
+    const editBlog = (blogId, data) => request.put(`${baseUrl}/${blogId}`, data)
+
     const deleteBlog = (blogId) => request.delete(`${baseUrl}/${blogId}`)
 
 
@@ -35,6 +34,7 @@ export const blogServiceFactory = (token) => {
         getAllBlogs,
         getOneBlog,
         createBlog,
+        editBlog,
         delete: deleteBlog
     }
 }

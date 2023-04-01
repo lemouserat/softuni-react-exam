@@ -1,6 +1,11 @@
+import { useContext } from "react"
 import { Link } from "react-router-dom"
+import { AuthContext } from "../../contexts/AuthContext"
 
 export const Header = () => {
+
+    const {isAuthenticated, userEmail} = useContext(AuthContext)
+
     return (
         <>
                 {/* <header className="nav-down responsive-nav hidden-lg hidden-md">
@@ -25,7 +30,7 @@ export const Header = () => {
     </header> */}
             <div className="sidebar-navigation hidde-sm hidden-xs">
         <div className="logo">
-            <a href="#">Photo<em>community</em></a>
+            <a href="#">Travel<em>blog</em></a>
         </div>
         <nav>
             <ul>
@@ -76,6 +81,14 @@ export const Header = () => {
                         <span className="rect"></span>
                         <span className="circle"></span>
                         Add Blog post </Link>
+                </li>
+                <li>
+                    
+                    <Link to="/logout">
+                        <span className="rect"></span>
+                        <span className="circle"></span>
+                        Logout </Link>
+                        <span className="rect">{userEmail}</span>
                 </li>
 
             </ul>

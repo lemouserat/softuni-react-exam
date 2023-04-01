@@ -1,0 +1,77 @@
+
+.deleteButton a {
+    font-size: 13px;
+    margin-top: 30px;
+    font-weight: 600;
+    color: #fff;
+    text-transform: capitalize;
+    background-color: red;
+    display: inline-block;
+    height: 44px;
+    line-height: 44px;
+    padding: 0px 25px;
+    letter-spacing: 0.25px;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  
+  .deleteButton a:hover {
+    background-color: #fff;
+    color: red;
+    font-weight: bold;
+  }
+
+.countryCity {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    background-color: #45489a;
+    color: white;
+}  
+
+.editDeleteButtons {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 60px;
+}
+
+.imageBlogDetails {
+    width: 100%;
+    max-width: 750px;
+    max-height: 500px;
+    position: relative;
+    text-align: center;
+    align-content: center;
+    align-self: center;
+    margin-top: 0px;
+    cursor: pointer;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.commentSection {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.commentList{
+    width: 60%;
+}
+
+.commentList ul li{
+    list-style-type: none;
+    text-align: left;
+    
+    padding: 5px;
+    background-color: white;
+    color: #45489a;
+    margin-bottom: 5px;
+}
+
+.commentList ul li p {
+    color: #45489a;
+}
+
+

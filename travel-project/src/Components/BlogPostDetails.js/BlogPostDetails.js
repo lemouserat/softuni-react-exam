@@ -5,6 +5,11 @@ import { useBlogContext } from "../../contexts/BlogContext";
 import { blogReducer } from "../../reducers/blogReducer";
 import { useService } from '../../hooks/useService';
 import { blogServiceFactory } from "../../services/blogService";
+import { Link } from "react-router-dom";
+import * as commentService from '../../services/commentService';
+
+ import styles from './BlogPostDetails.module.css'
+import { AddComment } from "../Comments/AddComment";
 
 
 export const BlogPostDetails = () => {
@@ -17,10 +22,12 @@ export const BlogPostDetails = () => {
 
      useEffect(() => {
         Promise.all([
-            blogService.getOneBlog(blogId)
-        ]).then(([blogData]) => {
+            blogService.getOneBlog(blogId),
+            commentService.getAllComments(blogId)
+        ]).then(([blogData, comments]) => {
             const blogState = {
-                ...blogData
+                ...blogData,
+                comments
             }
             dispatch({type: 'BLOG_FETCH', payload: blogState})
         })
@@ -41,6 +48,17 @@ export const BlogPostDetails = () => {
         }
     }
 
+    const onCommentSubmit = async (values) => {
+        const response = await commentService.createComment(blogId, values.comment);
+
+        dispatch({
+            type: 'COMMENT_ADD',
+            payload: response,
+            userEmail
+        })
+
+    }
+
 
     return (
      <section id="video" className="content-section">
@@ -48,29 +66,61 @@ export const BlogPostDetails = () => {
             <div className="col-md-12">
                 <div className="section-heading">
                     <h1>{blog.title}</h1>
-                    <p>Country: {blog.country} </p>
-                    <p>City: {blog.city}</p>
+                    <div className={styles.countryCity}>
+                        <h4>Country: {blog.country} </h4>
+                        <h4>City: {blog.city}</h4>
+                        <h4>Recomendation: {blog.recommend}</h4>
+                    </div>
                 </div>
+                <div className="col-md-12">
+
+                <img className={styles.imageBlogDetails} src={blog.blogPhotoUrl} alt=""/>
+
+            </div>
                 <div className="text-content">
                     <p>{blog.story}</p>
                 </div>
-                <div className="accent-button button">
-                    <a href="#blog">Edit</a>
-                </div>
-                <div className="accent-button button">
-                    <a href="#blog" onClick={onDeleteClick}>Delete</a>
-                </div>
+            {isOwner && (    
+                            <div className={styles.editDeleteButtons}>
+                                <div className="accent-button button">
+                                    <Link to={`/blogs/${blog._id}/edit`}>Edit</Link>
+                                </div>
+                                <div  className={styles.deleteButton}>
+                                    <a href="#blog" onClick={onDeleteClick}>Delete</a>
+                                </div>
+                            </div>
+            )}    
             </div>
-            <div className="col-md-12">
-                <div className="box-video">
-                    <div className="bg-video">
-                        <img src={blog.blogPhotoUrl} alt=""/>
+
+            
+            <h2>Comment section:</h2>
+            <div className={styles.commentSection}>
+                    <div className={styles.commentList}>
+                    <ul>
+                        {blog.comments && blog.comments.map(x => (
+                            <li key={x._id} className="comment">
+                                <p> <b>{x.comment}</b> <br/> by: {x.author.email}:</p>
+                            </li>
+                        ))}
+                    </ul>
+
+                    {!blog.comments?.length && (
+                        <p className="no-comment">No comments.</p>
+                    )}
                     </div>
-                    <div className="video-container">
-                        <img src={blog.blogPhotoUrl} alt=""/>
-                    </div>
+                    
+                    <div>
+                    {isAuthenticated && <AddComment onCommentSubmit={onCommentSubmit} />} 
+                    {!isAuthenticated && 
+                        <div className="accent-button button">
+                        <Link to="/login">Log in to add a comment</Link>
+                        </div> 
+                    } 
                 </div>
-            </div>
+                </div>   
+
+                
+
         </div>
     </section>
     )

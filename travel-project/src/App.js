@@ -12,6 +12,8 @@ import { AddBlog } from './Components/AddBlog/AddBlog';
 import { AuthProvider } from './contexts/AuthContext';
 import { BlogProvider } from './contexts/BlogContext';
 import { BlogPostDetails } from './Components/BlogPostDetails.js/BlogPostDetails';
+import { EditBlog } from './Components/EditBlog/EditBlog';
+import { Logout } from './Components/Logout/Logout';
 
 function App() {
   return (
@@ -28,10 +30,13 @@ function App() {
                 <Route path='/add-photo' element={<AddPhoto/>} /> 
                 <Route path='/photo-details' element={<PhotoDetails/>} /> 
                 <Route path='/blogs' element={<Blogs/>} /> 
-                <Route path='/blogs/:blogId' element={<BlogPostDetails />} />
                 <Route path='/add-blog' element={<AddBlog/>} /> 
+                <Route path='/blogs/:blogId' element={<BlogPostDetails />} />
+                <Route path='/blogs/:blogId/edit' element={<EditBlog />} />
+                <Route path='/logout' element={<Logout/>} />
                 </Routes> 
             </BlogProvider>
+
           <Footer />
           </div>
       </AuthProvider>

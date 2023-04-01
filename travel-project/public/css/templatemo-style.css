@@ -654,17 +654,6 @@ header {
   overflow: hidden;
 }
 
-.box-video .bg-video{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  z-index: 2;
-}
 
 .box-video .video-container{
   position: relative;

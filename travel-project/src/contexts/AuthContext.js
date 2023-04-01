@@ -15,7 +15,6 @@ export const AuthProvider = ({
 
     const authService = authServiceFactory(auth.accessToken)
 
-    
     const onLoginSubmit = async (data) => {
         try {
             const result = await authService.login(data);
@@ -24,14 +23,38 @@ export const AuthProvider = ({
 
             navigate('/blogs');
         } catch (error) {
-            console.log('There is a problem');
+            console.log('There is an authentication problem');
         }
     };
 
+    const onRegisterSubmit = async (values) => {
+        const {confirmPassword, ...registerData} = values;
+        if(confirmPassword !== registerData.password) {
+            console.log(`Register - password is different`)
+            return
+        }
+
+        try {
+            const result = await authService.register(registerData)
+            setAuth(result)
+            console.log(`Register - ${result}`)
+            navigate('/blogs')
+        } catch (error) {
+            console.log('There is an authentication problem');
+        }
+    }
+
+    const onLogout = async () => {
+        await authService.logout();
+
+        setAuth({});
+    };
 
 
     const contextValues = {
         onLoginSubmit,
+        onRegisterSubmit,
+        onLogout,
         userId: auth._id,
         token: auth.accessToken,
         userEmail: auth.email,
