@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { useNavigate, useParams } from "react-router"
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useBlogContext } from "../../contexts/BlogContext";
@@ -7,14 +7,19 @@ import { useService } from '../../hooks/useService';
 import { blogServiceFactory } from "../../services/blogService";
 import { Link } from "react-router-dom";
 import * as commentService from '../../services/commentService';
+import * as recommendationService from '../../services/recommendationService';
 
  import styles from './BlogPostDetails.module.css'
 import { AddComment } from "../Comments/AddComment";
+import {deleteComment} from '../../services/commentService';
+import { AddRecommendation } from "../AddRecommendion/AddRecommendation";
+import { DeleteRecommendation } from "../AddRecommendion/DeleteRecommendation";
+import { Action } from "@remix-run/router";
 
 
 export const BlogPostDetails = () => {
     const {blogId} = useParams();
-    const {userId, isAuthenticated, userEmail} = useAuthContext();
+    const {userId, isAuthenticated, userEmail, recommendations} = useAuthContext();
     const {deleteBlog} = useBlogContext()
     const [blog, dispatch] = useReducer(blogReducer, {})
     const blogService = useService(blogServiceFactory)
@@ -23,17 +28,35 @@ export const BlogPostDetails = () => {
      useEffect(() => {
         Promise.all([
             blogService.getOneBlog(blogId),
-            commentService.getAllComments(blogId)
-        ]).then(([blogData, comments]) => {
+            commentService.getAllComments(blogId),
+            recommendationService.getAllRecommendations(blogId)
+        ]).then(([blogData, comments, recommendations]) => {
             const blogState = {
                 ...blogData,
-                comments
+                comments,
+                recommendations
             }
             dispatch({type: 'BLOG_FETCH', payload: blogState})
         })
      }, [blogId])
 
     const isOwner = blog._ownerId === userId
+    //  console.log(`rec: ${blog.recommendations}`)
+    //  console.log(`comemnts: ${blog.comments}`)
+
+    //  if(blog.recommendations?.find(x => x._ownerId === userId)) {
+    //     console.log(userId) 
+    //     console.log(userEmail) 
+    //     console.log('there is')
+    //  } else {
+    //     console.log(userId) 
+    //     console.log(userEmail) 
+    //     console.log('not')
+    //  }
+
+     
+ const hasRecommended = (blog.recommendations?.some(x => x._ownerId === userId))
+ console.log(`hasRecommended: ${hasRecommended}`)
 
     const onDeleteClick = async () => {
         // eslint-disable-next-line no-restricted-globals
@@ -56,7 +79,47 @@ export const BlogPostDetails = () => {
             payload: response,
             userEmail
         })
+    }
 
+    
+    const onRecommendationSubmit = async (values) => {
+        const response = await recommendationService.createRecommendation(blogId, values.recommendation);
+        dispatch({
+            type: 'RECOMMENDATION_ADD',
+            payload: response,
+            userEmail
+            
+        })
+    }
+
+    const onRecommendationDelete = async (values) => {
+
+        const recommendation = (blog.recommendations?.find(x => x._ownerId === userId))
+        console.log(`recommendation: ${recommendation}`)
+        console.log(`recommendationId: ${recommendation._id}`)
+        const recommendationId = recommendation._id
+
+        const response = await recommendationService.deleteRecommendation(recommendationId);
+        dispatch({
+            type: 'RECOMMENDATION_DELETE',
+            payload: response,
+            userEmail,
+            
+        })
+
+        navigate(`/blogs/${blogId}`)
+
+    }
+
+
+    const onDeleteCommentClick = async (commentId) => {
+            await commentService.deleteComment(commentId)
+            dispatch({
+                type: 'COMMENT_DELETE',
+                // payload: response,
+                userEmail
+            })    
+            deleteComment(commentId)
     }
 
 
@@ -69,7 +132,7 @@ export const BlogPostDetails = () => {
                     <div className={styles.countryCity}>
                         <h4>Country: {blog.country} </h4>
                         <h4>City: {blog.city}</h4>
-                        <h4>Recomendation: {blog.recommend}</h4>
+                        <h4>Recommendation: {blog.recommendations?.length}</h4>
                     </div>
                 </div>
                 <div className="col-md-12">
@@ -79,7 +142,12 @@ export const BlogPostDetails = () => {
             </div>
                 <div className="text-content">
                     <p>{blog.story}</p>
+                    <p>Author: {blog.userEmail}</p>
                 </div>
+
+                { !hasRecommended && <AddRecommendation onRecommendationSubmit={onRecommendationSubmit}/>}
+                {hasRecommended && <DeleteRecommendation onRecommendationDelete={onRecommendationDelete}/>}    
+
             {isOwner && (    
                             <div className={styles.editDeleteButtons}>
                                 <div className="accent-button button">
@@ -100,8 +168,11 @@ export const BlogPostDetails = () => {
                         {blog.comments && blog.comments.map(x => (
                             <li key={x._id} className="comment">
                                 <p> <b>{x.comment}</b> <br/> by: {x.author.email}:</p>
+                                { userEmail === x.author.email && (
+                                    <button onClick={onDeleteCommentClick}>Delete</button>)}                             
                             </li>
                         ))}
+                        {/* <p>Number of comments:{blog.comments.length}</p> */}
                     </ul>
 
                     {!blog.comments?.length && (
@@ -119,7 +190,9 @@ export const BlogPostDetails = () => {
                 </div>
                 </div>   
 
-                
+                <div className="accent-button button">
+                                    <Link to={`/blogs/`}>Back to Blogs</Link>
+                </div>      
 
         </div>
     </section>

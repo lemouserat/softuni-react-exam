@@ -47,35 +47,43 @@ export const Header = () => {
                         Gallery </Link>
                 </li>
                 <li>
-                    <Link to="/login">
-                        <span className="rect"></span>
-                        <span className="circle"></span>
-                        Login </Link>
-                </li>
-                <li>
-                    <Link to="/register">
-                        <span className="rect"></span>
-                        <span className="circle"></span>
-                        Register </Link>
-                </li>
-                <li>
-                    <Link to="/add-photo">
-                        <span className="rect"></span>
-                        <span className="circle"></span>
-                        Add photo </Link>
-                </li>
-                <li>
-                    <Link to="/photo-details">
-                        <span className="rect"></span>
-                        <span className="circle"></span>
-                        Photo details </Link>
-                </li>
-                <li>
                     <Link to="/blogs">
                         <span className="rect"></span>
                         <span className="circle"></span>
                         Blog </Link>
                 </li>
+                {!isAuthenticated && (
+                    <>
+                                                            <li>
+                                    <Link to="/login">
+                                        <span className="rect"></span>
+                                        <span className="circle"></span>
+                                        Login </Link>
+                                </li>
+                                <li>
+                                    <Link to="/register">
+                                        <span className="rect"></span>
+                                        <span className="circle"></span>
+                                        Register </Link>
+                                </li>
+                    </>
+                )}
+
+
+                {isAuthenticated && (
+                    <>
+                                    <li>
+                    <Link to="/add-photo">
+                        <span className="rect"></span>
+                        <span className="circle"></span>
+                        Add photo </Link>
+                </li>
+                {/* <li>
+                    <Link to="/photo-details">
+                        <span className="rect"></span>
+                        <span className="circle"></span>
+                        Photo details </Link>
+                </li> */}
                 <li>
                     <Link to="/add-blog">
                         <span className="rect"></span>
@@ -90,6 +98,11 @@ export const Header = () => {
                         Logout </Link>
                         <span className="rect">{userEmail}</span>
                 </li>
+                    </>
+                )}
+
+
+
 
             </ul>
         </nav>

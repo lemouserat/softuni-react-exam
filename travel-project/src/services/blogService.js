@@ -27,7 +27,7 @@ export const blogServiceFactory = (token) => {
 
     const editBlog = (blogId, data) => request.put(`${baseUrl}/${blogId}`, data)
 
-    const deleteBlog = (blogId) => request.delete(`${baseUrl}/${blogId}`)
+     const deleteBlog = (blogId) => request.delete(`${baseUrl}/${blogId}`)
 
 
     return {
@@ -35,6 +35,6 @@ export const blogServiceFactory = (token) => {
         getOneBlog,
         createBlog,
         editBlog,
-        delete: deleteBlog
+        delete: deleteBlog,
     }
 }

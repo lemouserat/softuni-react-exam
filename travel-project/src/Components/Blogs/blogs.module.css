@@ -1,0 +1,22 @@
+.BlogsListWhole {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.BlogsItemWhole {
+    display: flex;
+    gap: 50px;
+    justify-content: start;
+    /* padding: 5px; */
+}
+
+
+.BlogsItemWhole img {
+    float: left;
+    width: 300px;
+    height: 200px;
+    /* overflow: hidden; */
+  }
+

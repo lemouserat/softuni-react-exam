@@ -32,6 +32,14 @@ export const BlogProvider = ({
         return blogs.find(blog => blog._id === blogId)
     }
 
+    // const onBlogRecommendSubmit = async (values) => {
+    //     const result = await blogService.editBlog(values._id, values, userId)
+
+    //     setBlogs(state => state.map(x => x._id === values._id ? result : x))
+
+    //     navigate(`/blogs/${values._id}`)
+    // }
+
     const onBlogEditSubmit = async (values) => {
         const result = await blogService.editBlog(values._id, values)
 
@@ -41,7 +49,8 @@ export const BlogProvider = ({
     }
 
     const deleteBlog = (blogId) => {
-        return blogs.find(blog => blog._id === blogId)
+        // return blogs.find(blog => blog._id === blogId)
+        setBlogs(state => state.filter(blog => blog._id !== blogId));
     }
 
     const contextValues = {
@@ -49,7 +58,8 @@ export const BlogProvider = ({
         onCreateBlogSubmit,
         getBlog,
         onBlogEditSubmit,
-        deleteBlog
+        deleteBlog,
+        // onBlogRecommendSubmit
     }
 
     return (

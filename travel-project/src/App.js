@@ -14,6 +14,8 @@ import { BlogProvider } from './contexts/BlogContext';
 import { BlogPostDetails } from './Components/BlogPostDetails.js/BlogPostDetails';
 import { EditBlog } from './Components/EditBlog/EditBlog';
 import { Logout } from './Components/Logout/Logout';
+import { RouteGuard } from './Components/common/RouteGuard';
+import { BlogOwner } from './Components/common/BlogOwner';
 
 function App() {
   return (
@@ -25,15 +27,27 @@ function App() {
             <Routes> 
                 <Route path='/' element={<Home />} /> 
                 <Route path='/gallery' element={<Gallery/>} /> 
+                <Route path='/photo-details' element={<PhotoDetails/>} /> 
                 <Route path='/login' element={<Login/>} /> 
                 <Route path='/register' element={<Register/>} /> 
-                <Route path='/add-photo' element={<AddPhoto/>} /> 
-                <Route path='/photo-details' element={<PhotoDetails/>} /> 
                 <Route path='/blogs' element={<Blogs/>} /> 
-                <Route path='/add-blog' element={<AddBlog/>} /> 
                 <Route path='/blogs/:blogId' element={<BlogPostDetails />} />
-                <Route path='/blogs/:blogId/edit' element={<EditBlog />} />
-                <Route path='/logout' element={<Logout/>} />
+
+                <Route element={<RouteGuard/>}>
+                    <Route path='/add-photo' element={<AddPhoto/>} /> 
+                    <Route path='/add-blog' element={<AddBlog/>} /> 
+                    <Route path='/blogs/:blogId/edit' element={
+                   <BlogOwner>
+                      <EditBlog />
+                   </BlogOwner> 
+                    } />
+                    <Route path='/logout' element={<Logout/>} />
+                </Route>
+
+
+
+                
+
                 </Routes> 
             </BlogProvider>
 

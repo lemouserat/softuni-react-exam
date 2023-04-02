@@ -18,3 +18,8 @@ export const createComment = async (blogId, comment) => {
 
     return result;
 };
+
+export const deleteComment = (commentId) => {
+    console.log(`comment id: ${commentId}`)
+    request.delete(`${baseUrl}/${commentId}`)
+}

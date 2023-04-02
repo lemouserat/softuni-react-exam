@@ -1,17 +1,20 @@
+import { useAuthContext } from "../../contexts/AuthContext";
 import { useBlogContext } from "../../contexts/BlogContext";
 import { useForm } from "../../hooks/useForm";
+
 
 
 export const AddBlog = () => {
 
     const {onCreateBlogSubmit} = useBlogContext();
+    const {userId, isAuthenticated, userEmail} = useAuthContext();
     const {values, changeHandler, onSubmit} = useForm({
         title: '',
-        recommend: '',
         country: '',
         city: '',
         blogPhotoUrl: '',
         story: '',
+        userEmail: userEmail
     }, onCreateBlogSubmit )
 
 
@@ -29,14 +32,9 @@ export const AddBlog = () => {
             <div className="section-content">
                 <form id="add-blog"  method="post" onSubmit={onSubmit}>
                     <div className="row">
-                        <div className="col-md-6">
+                        <div className="col-md-12">
                           <fieldset>
                             <input name="title" type="text" className="form-control" id="title" placeholder="Title..." required="" value={values.title} onChange={changeHandler}/>
-                          </fieldset>
-                        </div>
-                        <div className="col-md-6">
-                          <fieldset>
-                            <input name="recommend" type="text" className="form-control" id="recommend" placeholder="recommend..." value={values.recommend} onChange={changeHandler} required=""/>
                           </fieldset>
                         </div>
                         <div className="col-md-6">

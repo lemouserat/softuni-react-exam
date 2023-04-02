@@ -13,7 +13,6 @@ export const EditBlog = () => {
     const {values, changeHandler, onSubmit, changeValues} = useForm({
         _id: '',
         title: '',
-        recommend: '',
         country: '',
         city: '',
         blogPhotoUrl: '',
@@ -53,19 +52,6 @@ export const EditBlog = () => {
                                 value={values.title} 
                                 onChange={changeHandler}
                             />
-                          </fieldset>
-                        </div>
-                        <div className="col-md-6">
-                          <fieldset>
-                            <input 
-                                name="recommend" 
-                                type="text" 
-                                className="form-control" 
-                                id="recommend" 
-                                placeholder="recommend..." 
-                                value={values.recommend} 
-                                onChange={changeHandler} 
-                                />
                           </fieldset>
                         </div>
                         <div className="col-md-6">
