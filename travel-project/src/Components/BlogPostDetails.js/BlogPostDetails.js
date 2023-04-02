@@ -36,7 +36,7 @@ export const BlogPostDetails = () => {
                 comments,
                 recommendations
             }
-            dispatch({type: 'BLOG_FETCH', payload: blogState})
+            dispatch({type: 'BLOG_FETCH', payload: blogState},{type:'RECOMMENDATION_DELETE'})
         })
      }, [blogId])
 
@@ -55,7 +55,7 @@ export const BlogPostDetails = () => {
     //  }
 
      
- const hasRecommended = (blog.recommendations?.some(x => x._ownerId === userId))
+ let hasRecommended = (blog.recommendations?.some(x => x._ownerId === userId))
  console.log(`hasRecommended: ${hasRecommended}`)
 
     const onDeleteClick = async () => {
@@ -92,21 +92,20 @@ export const BlogPostDetails = () => {
         })
     }
 
-    const onRecommendationDelete = async (values) => {
+    const onRecommendationDelete = async () => {
 
         const recommendation = (blog.recommendations?.find(x => x._ownerId === userId))
         console.log(`recommendation: ${recommendation}`)
         console.log(`recommendationId: ${recommendation._id}`)
         const recommendationId = recommendation._id
 
-        const response = await recommendationService.deleteRecommendation(recommendationId);
-        dispatch({
-            type: 'RECOMMENDATION_DELETE',
-            payload: response,
-            userEmail,
+        await recommendationService.deleteRecommendation(recommendationId);
+        // dispatch({
+        //     type: 'RECOMMENDATION_DELETE',
             
-        })
-
+            
+        // })
+         blog.recommendations.length--
         navigate(`/blogs/${blogId}`)
 
     }
