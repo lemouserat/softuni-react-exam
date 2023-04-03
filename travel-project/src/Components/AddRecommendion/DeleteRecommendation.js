@@ -1,32 +1,20 @@
 import { useForm } from "../../hooks/useForm";
 
+
+import styles from './Recommendation.module.css'
+
 export const DeleteRecommendation = ({
     onRecommendationDelete,
 }) => {
-    const { values, changeHandler, onSubmit } = useForm({
+    const { onSubmit } = useForm({
         recommendation: ''
     }, onRecommendationDelete);
 
     return (
         <>
-
-
-<section>
-
-    <div className="section-content">
         <form onSubmit={onSubmit}>
-            <div className="row">
-
-                <div className="col-md-12">
-                  <fieldset>
-                    <button type="submit" id="form-submit" className="btn">Remove Recommendation</button>
-                  </fieldset>
-                </div>
-            </div>
+                <button type="submit" id="form-submit"  className={styles.removeRecommendButton}>Remove Recommendation</button>
         </form>
-    </div>
-</section>
-
         </>
     );
 };

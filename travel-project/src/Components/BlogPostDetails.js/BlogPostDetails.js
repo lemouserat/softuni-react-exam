@@ -14,16 +14,17 @@ import { AddComment } from "../Comments/AddComment";
 import {deleteComment} from '../../services/commentService';
 import { AddRecommendation } from "../AddRecommendion/AddRecommendation";
 import { DeleteRecommendation } from "../AddRecommendion/DeleteRecommendation";
-import { Action } from "@remix-run/router";
 
 
 export const BlogPostDetails = () => {
     const {blogId} = useParams();
-    const {userId, isAuthenticated, userEmail, recommendations} = useAuthContext();
+    const {userId, isAuthenticated, userEmail} = useAuthContext();
     const {deleteBlog} = useBlogContext()
     const [blog, dispatch] = useReducer(blogReducer, {})
     const blogService = useService(blogServiceFactory)
     const navigate = useNavigate()
+
+    // const [comments, setComments] = useState()
 
      useEffect(() => {
         Promise.all([
@@ -41,18 +42,6 @@ export const BlogPostDetails = () => {
      }, [blogId])
 
     const isOwner = blog._ownerId === userId
-    //  console.log(`rec: ${blog.recommendations}`)
-    //  console.log(`comemnts: ${blog.comments}`)
-
-    //  if(blog.recommendations?.find(x => x._ownerId === userId)) {
-    //     console.log(userId) 
-    //     console.log(userEmail) 
-    //     console.log('there is')
-    //  } else {
-    //     console.log(userId) 
-    //     console.log(userEmail) 
-    //     console.log('not')
-    //  }
 
      
  let hasRecommended = (blog.recommendations?.some(x => x._ownerId === userId))
@@ -64,21 +53,32 @@ export const BlogPostDetails = () => {
 
         if(result) {
             await blogService.delete(blog._id)
-
             deleteBlog(blog._id)
-
             navigate('/blogs')
         }
     }
 
     const onCommentSubmit = async (values) => {
         const response = await commentService.createComment(blogId, values.comment);
-
         dispatch({
             type: 'COMMENT_ADD',
             payload: response,
             userEmail
         })
+    }
+
+    const onCommentDeleteClick = async (id) => {
+        const commentId = id
+       
+        await commentService.deleteComment(commentId)
+        
+        dispatch({
+            type: 'COMMENT_DELETE',
+            payload: commentId,
+            
+        })
+
+       
     }
 
     
@@ -88,37 +88,18 @@ export const BlogPostDetails = () => {
             type: 'RECOMMENDATION_ADD',
             payload: response,
             userEmail
-            
         })
     }
 
     const onRecommendationDelete = async () => {
 
         const recommendation = (blog.recommendations?.find(x => x._ownerId === userId))
-        console.log(`recommendation: ${recommendation}`)
-        console.log(`recommendationId: ${recommendation._id}`)
         const recommendationId = recommendation._id
 
         await recommendationService.deleteRecommendation(recommendationId);
-        // dispatch({
-        //     type: 'RECOMMENDATION_DELETE',
-            
-            
-        // })
          blog.recommendations.length--
         navigate(`/blogs/${blogId}`)
 
-    }
-
-
-    const onDeleteCommentClick = async (commentId) => {
-            await commentService.deleteComment(commentId)
-            dispatch({
-                type: 'COMMENT_DELETE',
-                // payload: response,
-                userEmail
-            })    
-            deleteComment(commentId)
     }
 
 
@@ -143,9 +124,19 @@ export const BlogPostDetails = () => {
                     <p>{blog.story}</p>
                     <p>Author: {blog.userEmail}</p>
                 </div>
+                {isAuthenticated && (
 
-                { !hasRecommended && <AddRecommendation onRecommendationSubmit={onRecommendationSubmit}/>}
-                {hasRecommended && <DeleteRecommendation onRecommendationDelete={onRecommendationDelete}/>}    
+                    <div>
+                        {!isOwner && (
+                                <div>
+                                     {!hasRecommended && <AddRecommendation onRecommendationSubmit={onRecommendationSubmit}/>}
+                                     {hasRecommended && <DeleteRecommendation onRecommendationDelete={onRecommendationDelete}/>}    
+                                </div>
+                        )}
+                    </div>                   
+                )}
+
+
 
             {isOwner && (    
                             <div className={styles.editDeleteButtons}>
@@ -166,9 +157,9 @@ export const BlogPostDetails = () => {
                     <ul>
                         {blog.comments && blog.comments.map(x => (
                             <li key={x._id} className="comment">
-                                <p> <b>{x.comment}</b> <br/> by: {x.author.email}:</p>
+                                <p> <b>{x.comment}</b> <br/> by: {x.author.email} </p>
                                 { userEmail === x.author.email && (
-                                    <button onClick={onDeleteCommentClick}>Delete</button>)}                             
+                                    <button onClick={() => onCommentDeleteClick(x._id)}>Delete Comment</button>)}                             
                             </li>
                         ))}
                         {/* <p>Number of comments:{blog.comments.length}</p> */}

@@ -42,7 +42,7 @@ export const EditBlog = () => {
             <div className="section-content">
                 <form id="edit-blog"  method="post" onSubmit={onSubmit}>
                     <div className="row">
-                        <div className="col-md-6">
+                        <div className="col-md-12">
                           <fieldset>
                             <input 
                                 name="title" 

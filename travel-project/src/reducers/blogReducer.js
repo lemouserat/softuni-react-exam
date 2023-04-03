@@ -1,5 +1,4 @@
 
-
 export const blogReducer = (state, action) => {
     switch (action.type) {
         case 'BLOG_FETCH':
@@ -15,22 +14,16 @@ export const blogReducer = (state, action) => {
                         author: {
                             email: action.userEmail,
                         }
+                        
                     }
                 ],
             };
         case 'COMMENT_DELETE':
                 return {
                     ...state,
-                    comments: [
-                        ...state.comments,
-                        {
-                            ...action.payload,
-                            author: {
-                                email: action.userEmail,
-                            }
-                        }
-                    ],
-                }; 
+                    comments: state.comments.filter(comment => comment._id !== action.payload)
+                   
+                }  
         case 'RECOMMENDATION_ADD':
             return {
                 ...state,
@@ -41,9 +34,7 @@ export const blogReducer = (state, action) => {
                         author: {
                             email: action.userEmail,
                         },
-                        recommendation: {
-                            recommendationId: action._ownerId
-                        }
+
                     }
                 ],
             };
@@ -54,11 +45,8 @@ export const blogReducer = (state, action) => {
                         ...state.recommendations,
                         {
                             ...action.payload,
-                            // author: {
-                            //     email: action.userEmail,
-                            // }
                         },
-                        state
+                        
                     ],
                 }            
         default:
