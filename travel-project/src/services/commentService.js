@@ -20,9 +20,7 @@ export const createComment = async (blogId, comment) => {
 };
 
 export const deleteComment = async (commentId) => {
-    console.log(`comment id from commentService: ${commentId}`)
     const result = await request.delete(`${baseUrl}/${commentId}`)
-    console.log(`result from commentService: ${Object.toString(result)}`)
     return result
     
 }    

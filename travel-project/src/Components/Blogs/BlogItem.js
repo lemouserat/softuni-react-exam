@@ -9,8 +9,10 @@ export const BlogItem = ({
     country,
     city,
     blogPhotoUrl,
-    userEmail
+    userEmail,
+    _createdOn
 }) => {
+
     return (
         <li>
         <div className="item">
@@ -22,7 +24,6 @@ export const BlogItem = ({
            
             <div className="text-content">
                 <h4>{title}</h4>
-                <span>25 July 2018</span>
                 <p>Country: <b>{country}</b> </p>
                 <p>City: <b>{city}</b> </p>
                 <p>Author: {userEmail}</p>

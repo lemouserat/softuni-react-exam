@@ -10,6 +10,7 @@ export const BlogProvider = ({
 }) => {
     const navigate = useNavigate();
     const [blogs, setBlogs] = useState([]);
+    const [blogsOfUser, setBlogsOfUser] = useState([]);
     const blogService = blogServiceFactory();
 
     useEffect(() => {
@@ -32,6 +33,14 @@ export const BlogProvider = ({
         return blogs.find(blog => blog._id === blogId)
     }
 
+    const getBlogsOfUser = (userId) => {
+        // const blogsOfUser = (blogs?.find(x => x._ownerId === userId))
+
+        // setBlogsOfUser(state => [...state, blogsOfUser])
+        setBlogsOfUser(blogs => blogs.filter(blog => blog._ownerId == userId));
+         
+    }
+
     const onBlogEditSubmit = async (values) => {
         const result = await blogService.editBlog(values._id, values)
 
@@ -51,11 +60,14 @@ export const BlogProvider = ({
 
     const contextValues = {
         blogs,
+        blogsOfUser,
         onCreateBlogSubmit,
         getBlog,
         onBlogEditSubmit,
         deleteBlog,
-        deleteComment
+        deleteComment,
+        getBlogsOfUser
+        
     }
 
     return (

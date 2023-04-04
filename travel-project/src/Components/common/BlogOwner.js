@@ -10,9 +10,9 @@ export const BlogOwner = ({
     const { getBlog } = useBlogContext();
     const { userId } = useAuthContext();
 
-    const currentGame = getBlog(blogId);
+    const currentBlog = getBlog(blogId);
 
-    if (currentGame && currentGame._ownerId !== userId) {
+    if (currentBlog && currentBlog._ownerId !== userId) {
         return <Navigate to={`/blogs/${blogId}`} replace />
     }
 

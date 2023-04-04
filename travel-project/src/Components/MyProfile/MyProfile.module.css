@@ -1,0 +1,14 @@
+.BlogsListWhole {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.MyProfileHeadings {
+    margin: 30px 0px;
+    padding: 10px;
+    color: white;
+    background-color: #45489a;
+}
+
+

@@ -75,3 +75,25 @@
 }
 
 
+.deleteCommentButton {
+    font-size: 10px;
+    margin-top: 10px;
+    font-weight: 600;
+    color: #fff;
+    text-transform: capitalize;
+    background-color: red;
+    display: inline-block;
+    height: 30px;
+    line-height: 28px;
+    letter-spacing: 0.25px;
+    text-decoration: none;
+    transition: all 0.3s;
+    border: 1px solid red;
+  }
+
+  .deleteCommentButton:hover {
+    background-color: #fff;
+    color: red;
+    font-weight: bold;
+  }  
+

@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer } from "react";
 import { useNavigate, useParams } from "react-router"
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useBlogContext } from "../../contexts/BlogContext";
@@ -11,7 +11,6 @@ import * as recommendationService from '../../services/recommendationService';
 
  import styles from './BlogPostDetails.module.css'
 import { AddComment } from "../Comments/AddComment";
-import {deleteComment} from '../../services/commentService';
 import { AddRecommendation } from "../AddRecommendion/AddRecommendation";
 import { DeleteRecommendation } from "../AddRecommendion/DeleteRecommendation";
 
@@ -23,8 +22,6 @@ export const BlogPostDetails = () => {
     const [blog, dispatch] = useReducer(blogReducer, {})
     const blogService = useService(blogServiceFactory)
     const navigate = useNavigate()
-
-    // const [comments, setComments] = useState()
 
      useEffect(() => {
         Promise.all([
@@ -45,7 +42,7 @@ export const BlogPostDetails = () => {
 
      
  let hasRecommended = (blog.recommendations?.some(x => x._ownerId === userId))
- console.log(`hasRecommended: ${hasRecommended}`)
+
 
     const onDeleteClick = async () => {
         // eslint-disable-next-line no-restricted-globals
@@ -67,18 +64,14 @@ export const BlogPostDetails = () => {
         })
     }
 
-    const onCommentDeleteClick = async (id) => {
+    const onCommentDelete = async (id) => {
         const commentId = id
-       
         await commentService.deleteComment(commentId)
         
         dispatch({
             type: 'COMMENT_DELETE',
             payload: commentId,
-            
         })
-
-       
     }
 
     
@@ -99,8 +92,20 @@ export const BlogPostDetails = () => {
         await recommendationService.deleteRecommendation(recommendationId);
          blog.recommendations.length--
         navigate(`/blogs/${blogId}`)
-
     }
+
+    // const onRecommendationDelete = async () => {
+
+    //     const recommendation = (blog.recommendations?.find(x => x._ownerId === userId))
+    //     const recommendationId = recommendation._id
+
+    //     await recommendationService.deleteRecommendation(recommendationId);
+
+    //     dispatch({
+    //         type: 'RECOMMENDATION_DELETETE',
+    //         payload: recommendationId,
+    //     })
+    // }
 
 
     return (
@@ -136,8 +141,6 @@ export const BlogPostDetails = () => {
                     </div>                   
                 )}
 
-
-
             {isOwner && (    
                             <div className={styles.editDeleteButtons}>
                                 <div className="accent-button button">
@@ -159,10 +162,10 @@ export const BlogPostDetails = () => {
                             <li key={x._id} className="comment">
                                 <p> <b>{x.comment}</b> <br/> by: {x.author.email} </p>
                                 { userEmail === x.author.email && (
-                                    <button onClick={() => onCommentDeleteClick(x._id)}>Delete Comment</button>)}                             
+                                    <button onClick={() => onCommentDelete(x._id)} className={styles.deleteCommentButton}>Delete</button>)}                             
                             </li>
                         ))}
-                        {/* <p>Number of comments:{blog.comments.length}</p> */}
+                        
                     </ul>
 
                     {!blog.comments?.length && (

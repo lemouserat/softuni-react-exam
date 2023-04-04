@@ -21,15 +21,9 @@ export const createRecommendation = async (blogId, recommendation) => {
 
 
 export const deleteRecommendation = async (recommendationId) => {
-    console.log(`recId in recService: ${recommendationId}`)
-    // const result = 
     await request.delete(`${baseUrl}/${recommendationId}`);
 
 
-    // return result;
+
 };
 
-// export const deleteRecommendation = (recommendationId) => {
-//     console.log(`recommendation id: ${recommendationId}`)
-//     request.delete(`${baseUrl}/${recommendationId}`)
-// }

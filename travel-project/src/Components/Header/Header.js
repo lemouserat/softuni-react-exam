@@ -78,12 +78,6 @@ export const Header = () => {
                         <span className="circle"></span>
                         Add photo </Link>
                 </li>
-                {/* <li>
-                    <Link to="/photo-details">
-                        <span className="rect"></span>
-                        <span className="circle"></span>
-                        Photo details </Link>
-                </li> */}
                 <li>
                     <Link to="/add-blog">
                         <span className="rect"></span>
@@ -91,12 +85,16 @@ export const Header = () => {
                         Add Blog post </Link>
                 </li>
                 <li>
-                    
+                    <Link to="/my-profile">
+                        <span className="rect"></span>
+                        <span className="circle"></span>
+                        My profile - {userEmail} </Link>
+                </li>
+                <li>
                     <Link to="/logout">
                         <span className="rect"></span>
                         <span className="circle"></span>
                         Logout </Link>
-                        <span className="rect">{userEmail}</span>
                 </li>
                     </>
                 )}

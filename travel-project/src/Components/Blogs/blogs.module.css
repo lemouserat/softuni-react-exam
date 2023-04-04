@@ -7,7 +7,7 @@
 
 .BlogsItemWhole {
     display: flex;
-    gap: 50px;
+    gap: 100px;
     justify-content: start;
     /* padding: 5px; */
 }
@@ -15,8 +15,10 @@
 
 .BlogsItemWhole img {
     float: left;
-    width: 300px;
+    width: 200px;
     height: 200px;
     /* overflow: hidden; */
+    border-radius: 50%;
+    object-fit: cover;
   }
 

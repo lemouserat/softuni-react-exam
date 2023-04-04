@@ -6,7 +6,6 @@ import { Route, Routes } from 'react-router-dom';
 import { Register } from './Components/Register/Register';
 import { Login } from './Components/Login/Login';
 import { AddPhoto } from './Components/AddPhoto/AddPhoto';
-import { PhotoDetails } from './Components/PhotoDetails/PhotoDetails';
 import { Blogs } from './Components/Blogs/Blogs';
 import { AddBlog } from './Components/AddBlog/AddBlog';
 import { AuthProvider } from './contexts/AuthContext';
@@ -16,6 +15,7 @@ import { EditBlog } from './Components/EditBlog/EditBlog';
 import { Logout } from './Components/Logout/Logout';
 import { RouteGuard } from './Components/common/RouteGuard';
 import { BlogOwner } from './Components/common/BlogOwner';
+import { MyProfile } from './Components/MyProfile/MyProfile';
 
 function App() {
   return (
@@ -27,7 +27,6 @@ function App() {
             <Routes> 
                 <Route path='/' element={<Home />} /> 
                 <Route path='/gallery' element={<Gallery/>} /> 
-                <Route path='/photo-details' element={<PhotoDetails/>} /> 
                 <Route path='/login' element={<Login/>} /> 
                 <Route path='/register' element={<Register/>} /> 
                 <Route path='/blogs' element={<Blogs/>} /> 
@@ -42,12 +41,8 @@ function App() {
                    </BlogOwner> 
                     } />
                     <Route path='/logout' element={<Logout/>} />
+                    <Route path='/my-profile' element={<MyProfile/>} /> 
                 </Route>
-
-
-
-                
-
                 </Routes> 
             </BlogProvider>
 
