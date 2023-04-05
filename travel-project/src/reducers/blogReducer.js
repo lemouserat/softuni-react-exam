@@ -1,8 +1,8 @@
 
 export const blogReducer = (state, action) => {
     switch (action.type) {
-        case 'BLOG_FETCH':
-            // return Object.assign({}, action.payload);
+        case 'BLOG_LOAD':
+         
             return { ...action.payload };
         case 'COMMENT_ADD':
             return {

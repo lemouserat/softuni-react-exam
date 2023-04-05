@@ -13,8 +13,18 @@ export const getAllComments = async (blogId) => {
     return comments;
 };
 
-export const createComment = async (blogId, comment) => {
-    const result = await request.post(baseUrl, { blogId, comment });
+export const getAllCommentsByUser = async () => {
+    // const searchQuery = encodeURIComponent(`author=_ownerId:users`);
+
+    const result = await request.get(`${baseUrl}`);
+    const comments = Object.values(result);
+
+    return comments;
+};
+
+
+export const createComment = async (blogId, blogTitle, comment) => {
+    const result = await request.post(baseUrl, { blogId, blogTitle, comment });
 
     return result;
 };

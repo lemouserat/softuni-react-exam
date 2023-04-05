@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { useNavigate, useParams } from "react-router";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useBlogContext } from "../../contexts/BlogContext";
@@ -7,8 +7,10 @@ import { blogReducer } from "../../reducers/blogReducer";
 import { blogServiceFactory } from "../../services/blogService";
 import { BlogItem } from "../Blogs/BlogItem";
 
+import * as commentService from '../../services/commentService';
 
 import styles from './MyProfile.module.css'
+import { useState } from "react";
 
 export const MyProfile = () => {
 
@@ -20,10 +22,19 @@ export const MyProfile = () => {
     const {blogs, } = useBlogContext()
 
 
+    const [comments, setComments] = useState([]);
+
      let blogsOfUser = (blogs?.filter(x => x._ownerId === userId))
 
 
+     useEffect(() => {
+        commentService.getAllCommentsByUser()
+            .then(comments => {
+                setComments(comments)
+            })
+    }, [])
 
+    let commentsOfUser = (comments?.filter(x => x._ownerId === userId))
 
     return (
         <>
@@ -54,7 +65,37 @@ export const MyProfile = () => {
                     </section> 
                 </div>
             </div>
-        </div>
+
+
+
+            <div className="tabs-content">
+                <div className="wrapper">
+                <h2 className={styles.MyProfileHeadings}>My comments:</h2>
+                  
+                        <ul className={styles.MyProfileListOfComments}>
+                        {commentsOfUser && commentsOfUser.map(x => (
+                            <li key={x._id} className={styles.MyProfileComment}>
+                                <p> <b>{x.comment}</b> <br/>in: <i>{x.blogTitle}</i>  </p>                        
+                            </li>
+                        ))}
+                    </ul>
+
+                    {!comments?.length && (
+                        <p className="no-comment">No comments.</p>
+                    )}
+                      
+                   
+                </div>
+            </div>
+
+
+
+
+
+
+
+            </div>
+
     </section>
 
         </>

@@ -5,23 +5,19 @@ import styles from './blogs.module.css'
 export const BlogItem = ({
     _id,
     title,
-    // recommend,
     country,
     city,
     blogPhotoUrl,
     userEmail,
-    _createdOn
 }) => {
 
     return (
         <li>
         <div className="item">
            <div className={styles.BlogsItemWhole}>
-
-              
+     
                     <img src={blogPhotoUrl} alt="blogsItem-img" />
-            
-           
+
             <div className="text-content">
                 <h4>{title}</h4>
                 <p>Country: <b>{country}</b> </p>

@@ -1,0 +1,26 @@
+
+.footerStyle {
+
+
+    background-color: rgba(12,12,12,0.9);
+    height: 80px;
+    line-height: 80px;
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .footerStyle p {
+    margin-bottom: 0px;
+    font-size: 13px;
+    line-height: 80px;
+    color: #fff;
+    letter-spacing: 0.5px;
+    font-weight: 300;
+  }
+  
+  .footerStyle p a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+  }

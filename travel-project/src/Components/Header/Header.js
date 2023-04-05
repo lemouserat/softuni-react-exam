@@ -50,7 +50,7 @@ export const Header = () => {
                     <Link to="/blogs">
                         <span className="rect"></span>
                         <span className="circle"></span>
-                        Blog </Link>
+                        Blogs </Link>
                 </li>
                 {!isAuthenticated && (
                     <>
@@ -72,12 +72,12 @@ export const Header = () => {
 
                 {isAuthenticated && (
                     <>
-                                    <li>
+                                    {/* <li>
                     <Link to="/add-photo">
                         <span className="rect"></span>
                         <span className="circle"></span>
                         Add photo </Link>
-                </li>
+                </li> */}
                 <li>
                     <Link to="/add-blog">
                         <span className="rect"></span>

@@ -11,29 +11,6 @@ export const AddComment = ({
 
     return (
         <>
-        {/* <div className="section-content">
-                <form id="login" onSubmit={onSubmit}>
-                    <div className="row">
-                        <div className="col-md-8">
-                          <fieldset>
-                        <textarea
-                            name="comment"
-                            placeholder="Type in your comment..."
-                            value={values.comment}
-                            onChange={changeHandler}
-                        >
-                        </textarea>
-                        <div className="col-md-8">
-                          <fieldset>
-                            <button type="submit" id="form-submit" className="btn">Login</button>
-                          </fieldset>
-                        </div>
-                          </fieldset>
-                        </div>
-                    </div>
-                </form>
-            </div> */}
-
 
 <section className={styles.addCommentSection}>
 

@@ -13,6 +13,12 @@ import * as recommendationService from '../../services/recommendationService';
 import { AddComment } from "../Comments/AddComment";
 import { AddRecommendation } from "../AddRecommendion/AddRecommendation";
 import { DeleteRecommendation } from "../AddRecommendion/DeleteRecommendation";
+import { useState } from "react";
+
+import {Modal, Button} from "react-bootstrap"
+
+
+
 
 
 export const BlogPostDetails = () => {
@@ -23,6 +29,10 @@ export const BlogPostDetails = () => {
     const blogService = useService(blogServiceFactory)
     const navigate = useNavigate()
 
+    const [show, setShow] = useState(false)
+
+
+  
      useEffect(() => {
         Promise.all([
             blogService.getOneBlog(blogId),
@@ -34,7 +44,7 @@ export const BlogPostDetails = () => {
                 comments,
                 recommendations
             }
-            dispatch({type: 'BLOG_FETCH', payload: blogState},{type:'RECOMMENDATION_DELETE'})
+            dispatch({type: 'BLOG_LOAD', payload: blogState},)
         })
      }, [blogId])
 
@@ -43,20 +53,26 @@ export const BlogPostDetails = () => {
      
  let hasRecommended = (blog.recommendations?.some(x => x._ownerId === userId))
 
+ const onDeleteClick = async () => {
 
-    const onDeleteClick = async () => {
-        // eslint-disable-next-line no-restricted-globals
-        const result = confirm(`Are you sure you wnt to delete ${blog.title}`)
+    await blogService.delete(blog._id)
+    deleteBlog(blog._id)
+    navigate('/blogs')
 
-        if(result) {
-            await blogService.delete(blog._id)
-            deleteBlog(blog._id)
-            navigate('/blogs')
-        }
-    }
+}
+
+const handleClickDelete = (id) => {
+setShow(true)
+console.log(id)
+}
+
+ const handleClose = () => {
+    setShow(false)
+}
 
     const onCommentSubmit = async (values) => {
-        const response = await commentService.createComment(blogId, values.comment);
+        const blogTitle = blog.title
+        const response = await commentService.createComment(blogId, blogTitle, values.comment);
         dispatch({
             type: 'COMMENT_ADD',
             payload: response,
@@ -108,8 +124,24 @@ export const BlogPostDetails = () => {
     // }
 
 
+
     return (
-     <section id="video" className="content-section">
+        <>
+    <Modal animation={false} show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Are you sure you want to delete {blog.title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Think about everyone who would want to see your blog first!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => onDeleteClick(blog._id)}>
+            Delete
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Cancel
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <section id="video" className="content-section">
         <div className="row">
             <div className="col-md-12">
                 <div className="section-heading">
@@ -147,7 +179,8 @@ export const BlogPostDetails = () => {
                                     <Link to={`/blogs/${blog._id}/edit`}>Edit</Link>
                                 </div>
                                 <div  className={styles.deleteButton}>
-                                    <a href="#blog" onClick={onDeleteClick}>Delete</a>
+                                    <a href="#blog" onClick={() => handleClickDelete(blog._id)}>Delete</a>
+                                    
                                 </div>
                             </div>
             )}    
@@ -189,5 +222,8 @@ export const BlogPostDetails = () => {
 
         </div>
     </section>
+        
+        </>
+    
     )
 }
