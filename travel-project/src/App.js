@@ -46,7 +46,7 @@ function App() {
                 </Routes> 
             </BlogProvider>
 
-          <Footer />
+          {/* <Footer /> */}
           </div>
       </AuthProvider>
     </div>
