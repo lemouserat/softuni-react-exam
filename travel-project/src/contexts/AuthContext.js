@@ -1,3 +1,4 @@
+
 import { createContext, useContext } from "react";
 import { useNavigate } from "react-router";
 import { useLocalStorage } from "../hooks/useLocalStorage";
@@ -14,6 +15,8 @@ export const AuthProvider = ({
     const navigate = useNavigate();
 
     const authService = authServiceFactory(auth.accessToken)
+
+
 
     const onLoginSubmit = async (data) => {
         try {
@@ -49,7 +52,6 @@ export const AuthProvider = ({
 
         setAuth({});
     };
-
 
     const contextValues = {
         onLoginSubmit,

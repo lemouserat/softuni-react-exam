@@ -5,12 +5,14 @@ import { useForm } from "../../hooks/useForm";
 import { useService } from "../../hooks/useService";
 import { blogServiceFactory } from "../../services/blogService";
 
+import styles from '../Register/Register.module.css'
+
 
 export const EditBlog = () => {
     const {onBlogEditSubmit} = useBlogContext();
     const {blogId} = useParams();
     const blogService = useService(blogServiceFactory);
-    const {values, changeHandler, onSubmit, changeValues} = useForm({
+    const {values, formErrors, changeHandler, onSubmit, changeValues, validateForm} = useForm({
         _id: '',
         title: '',
         country: '',
@@ -25,6 +27,8 @@ export const EditBlog = () => {
                 changeValues(result)
             })
     }, [blogId])
+
+    const isEnabled = !Object.keys(formErrors).some(x => formErrors[x]);
     
 
 
@@ -51,7 +55,14 @@ export const EditBlog = () => {
                                 id="title" 
                                 value={values.title} 
                                 onChange={changeHandler}
+                                onBlur={validateForm}
+                                required
                             />
+                                 {formErrors.title && 
+                                    <p className={styles.formError}>
+                                  {formErrors.title}
+                                    </p>
+                                } 
                           </fieldset>
                         </div>
                         <div className="col-md-6">
@@ -64,6 +75,7 @@ export const EditBlog = () => {
                                 placeholder="Country..." 
                                 value={values.country} 
                                 onChange={changeHandler}
+                                required
                             />
                           </fieldset>
                         </div>
@@ -77,6 +89,7 @@ export const EditBlog = () => {
                                 placeholder="City..." 
                                 value={values.city} 
                                 onChange={changeHandler} 
+                                required
                             />
                           </fieldset>
                         </div>
@@ -90,7 +103,14 @@ export const EditBlog = () => {
                                 placeholder="Photo url..." 
                                 value={values.blogPhotoUrl} 
                                 onChange={changeHandler} 
+                                onBlur={validateForm}
+                                required
                             />
+                                {formErrors.blogPhotoUrl && 
+                                    <p className={styles.formError}>
+                                     {formErrors.blogPhotoUrl}
+                                  </p>
+                                } 
                           </fieldset>
                         </div>
                         <div className="col-md-12">
@@ -103,12 +123,21 @@ export const EditBlog = () => {
                                 placeholder="Share a short story with us..." 
                                 value={values.story} 
                                 onChange={changeHandler} 
-                            ></textarea>
+                                onBlur={validateForm}
+                                required
+                            >
+
+                            </textarea>
+                            {formErrors.story && 
+                                    <p className={styles.formError}>
+                                  {formErrors.story}
+                                    </p>
+                                } 
                           </fieldset>
                         </div>
                         <div className="col-md-12">
                           <fieldset>
-                            <button type="submit" id="form-submit" className="btn">Edit blog post</button>
+                            <button type="submit" id="form-submit" className="btn" disabled={!isEnabled}>Edit blog post</button>
                           </fieldset>
                         </div>
                     </div>

@@ -1,8 +1,9 @@
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useForm } from "../../hooks/useForm";
 
+import styles from '../Register/Register.module.css'
+
 const LoginFormKeys = {
-  // Username: 'username',
   Email: 'email',
   Password: 'password'
 }
@@ -10,11 +11,12 @@ const LoginFormKeys = {
 export const Login = () => {
 
   const {onLoginSubmit} = useAuthContext();
-  const {values, changeHandler, onSubmit} = useForm({
+  const {values, formErrors, changeHandler, onSubmit, validateForm} = useForm({
     [LoginFormKeys.Email]: '',
     [LoginFormKeys.Password]: ''
   }, onLoginSubmit)
 
+  const isEnabled = !Object.keys(formErrors).some(x => formErrors[x]);
 
     return (
         <section id="contact" className="login-section">
@@ -37,7 +39,13 @@ export const Login = () => {
                               name={LoginFormKeys.Email}
                               onChange={changeHandler}
                               className="form-control" 
+                              onBlur={validateForm}
                               />
+                                {formErrors.email && 
+                                    <p className={styles.formError}>
+                                     {formErrors.email}
+                                    </p>
+                                } 
                           </fieldset>
                         </div>
 
@@ -49,6 +57,7 @@ export const Login = () => {
                               value={values[LoginFormKeys.Password]}
                               onChange={changeHandler}
                               className="form-control" 
+                              
                               />
                           </fieldset>
                         </div>
@@ -56,7 +65,7 @@ export const Login = () => {
 
                         <div className="col-md-8">
                           <fieldset>
-                            <button type="submit" id="form-submit" className="btn">Login</button>
+                            <button type="submit" id="form-submit" className="btn" disabled={!isEnabled}>Login</button>
                           </fieldset>
                         </div>
                     </div>
