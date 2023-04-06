@@ -5,7 +5,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import styles from './Register.module.css'
 
 export const Register = () => {
-  const {onRegisterSubmit} = useContext(AuthContext)
+  const {onRegisterSubmit, error} = useContext(AuthContext)
   const {values, formErrors, changeHandler, onSubmit, validateForm} = useForm({
     email:'',
     password: '',
@@ -20,12 +20,12 @@ export const Register = () => {
         <div id="contact-content">
             <div className="section-heading">
                 <h1>Register at<br/><em>Travel</em>BLOG</h1>
-                {/* <p>Curabitur hendrerit mauris mollis ipsum vulputate rutrum. 
-                <br/>Phasellus luctus odio eget dui imperdiet.</p> */}
-                
             </div>
+            {error && <p className={styles.errorMessage}>An error occured while authenticating: {error.message}</p>}
             <div className="section-content">
-                <form id="register" method="post" onSubmit={(e) => onSubmit(e)}>
+       
+                {/* <form id="register" method="post" onSubmit={(e) => onSubmit(e)}> */}
+                <form id="register" method="post" onSubmit={onSubmit}>
                     <div className="row">
                         <div className="col-md-12">
                           <fieldset>

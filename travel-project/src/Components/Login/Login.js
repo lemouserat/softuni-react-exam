@@ -16,22 +16,9 @@ export const Login = () => {
     [LoginFormKeys.Email]: '',
     [LoginFormKeys.Password]: ''
   }, onLoginSubmit)
-  const navigate = useNavigate()
 
   const isEnabled = !Object.keys(formErrors).some(x => formErrors[x]);
 
-
-  // function hideLoadingDiv() {
-  //   setTimeout(function(){
-  //     console.log("timeout started")
-  //     const box =  document.getElementsByClassName('errorMessage')
-  //     box.style.visibility = 'hidden';
-  //   },2000)
-  // }
-
-  // if (error) {
-  //   hideLoadingDiv()
-  // }
 
     return (
         <section id="contact" className="login-section">

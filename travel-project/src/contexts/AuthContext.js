@@ -38,7 +38,9 @@ export const AuthProvider = ({
     const onRegisterSubmit = async (values) => {
         const {confirmPassword, ...registerData} = values;
         if(confirmPassword !== registerData.password) {
-            console.log(`Register - password is different`)
+            console.log(`The two passwords do not match`)
+            console.log(error)
+            // setError(`The two passwords do not match`)
             return
         }
 

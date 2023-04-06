@@ -29,13 +29,14 @@ export const useForm = (initialValues, onSubmitHandler) => {
 
     const validateForm = (e) => {
 
-        console.log(`validate`)
-       
+      
         const value = e.target.value
         const errors = {};
-        const passwordToCheck = e.target.name === 'password'
+        let passwordToCheck = ''
 
+        console.log(values.password)
         console.log(passwordToCheck)
+        console.log(value)
 
      
 
@@ -44,13 +45,14 @@ export const useForm = (initialValues, onSubmitHandler) => {
         }
 
         if(e.target.name === 'password' && (value.length < 5)) {
+            passwordToCheck = e.target.name === 'password'
             
             errors.password = 'Password should be more than 5 symbols'
         }
 
-        if(e.target.name === 'confirmPassword' && (value.length !== passwordToCheck)) {
+        if(e.target.name === 'confirmPassword' && (value !== values.password)) {
             
-            errors.confirmPassword = 'Passwords do no match '
+            errors.confirmPassword = 'Passwords do not match '
         }
 
         if(e.target.name === 'title' && (value.length < 3 || value.length > 20)) {
