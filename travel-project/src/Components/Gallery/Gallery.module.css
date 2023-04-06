@@ -1,0 +1,31 @@
+.wholeGallery {
+    /* display: flex; */
+    /* flex-direction: row; */
+    
+    
+}
+
+
+.wholeGallery ul{
+    /* display: flex;
+    /* flex-direction: row; 
+    gap: 30px;
+    overflow: auto; */
+    list-style: none;
+    width: 1200px;
+}
+
+
+.galleryItem a img{
+    float: left;
+    width: 500px;
+    height: 400px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.galleryItem a img:hover{
+    max-width: 1000px;
+    z-index: 20;
+    
+}

@@ -27,7 +27,7 @@ export const Register = () => {
             <div className="section-content">
                 <form id="register" method="post" onSubmit={(e) => onSubmit(e)}>
                     <div className="row">
-                        <div className="col-md-8">
+                        <div className="col-md-12">
                           <fieldset>
                             <input 
                               name="email" 
@@ -49,7 +49,7 @@ export const Register = () => {
 
                         </div>
 
-                        <div className="col-md-8">
+                        <div className="col-md-12">
                           <fieldset>
                             <input 
                               name="password" 
@@ -69,7 +69,7 @@ export const Register = () => {
                                 } 
                           </fieldset>
                         </div>
-                        <div className="col-md-8">
+                        <div className="col-md-12">
                           <fieldset>
                           <input 
                               name="confirmPassword" 
@@ -89,7 +89,7 @@ export const Register = () => {
                                 } 
                           </fieldset>
                         </div>
-                        <div className="col-md-8">
+                        <div className="col-md-12">
                           <fieldset>
                             <button type="submit" id="form-submit" className="btn" disabled={!isEnabled}>Register Now</button>
                           </fieldset>

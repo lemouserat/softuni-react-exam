@@ -5,7 +5,6 @@ import { Home } from './Components/Home/Home';
 import { Route, Routes } from 'react-router-dom';
 import { Register } from './Components/Register/Register';
 import { Login } from './Components/Login/Login';
-import { AddPhoto } from './Components/AddPhoto/AddPhoto';
 import { Blogs } from './Components/Blogs/Blogs';
 import { AddBlog } from './Components/AddBlog/AddBlog';
 import { AuthProvider } from './contexts/AuthContext';
@@ -34,7 +33,6 @@ function App() {
                 <Route path='/blogs/:blogId' element={<BlogPostDetails />} />
 
                 <Route element={<RouteGuard/>}>
-                    <Route path='/add-photo' element={<AddPhoto/>} /> 
                     <Route path='/add-blog' element={<AddBlog/>} /> 
                     <Route path='/blogs/:blogId/edit' element={
                    <BlogOwner>

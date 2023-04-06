@@ -62,9 +62,9 @@ export const useForm = (initialValues, onSubmitHandler) => {
             errors.blogPhotoUrl = 'Blog photo url is not a real URL containing an image.' 
         }
 
-        if(e.target.name === 'story' && (value.length < 10 || value.length > 200)) {
+        if(e.target.name === 'story' && (value.length < 10 || value.length > 500)) {
             
-            errors.story = 'Story should be between 10 and 200 characters.'
+            errors.story = 'Story should be between 10 and 500 characters.'
         } 
 
         setFormErrors(errors)

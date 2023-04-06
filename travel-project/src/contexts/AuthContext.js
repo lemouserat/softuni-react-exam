@@ -1,4 +1,5 @@
 
+import { useState } from "react";
 import { createContext, useContext } from "react";
 import { useNavigate } from "react-router";
 import { useLocalStorage } from "../hooks/useLocalStorage";
@@ -15,6 +16,7 @@ export const AuthProvider = ({
     const navigate = useNavigate();
 
     const authService = authServiceFactory(auth.accessToken)
+    const [error, setError] = useState(null)
 
 
 
@@ -27,6 +29,9 @@ export const AuthProvider = ({
             navigate('/blogs');
         } catch (error) {
             console.log('There is an authentication problem');
+            console.log(error);
+            setError(error)
+            
         }
     };
 
@@ -61,6 +66,9 @@ export const AuthProvider = ({
         token: auth.accessToken,
         userEmail: auth.email,
         isAuthenticated: !!auth.accessToken,
+
+        setError,
+        error
     };
 
 

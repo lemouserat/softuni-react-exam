@@ -1,0 +1,43 @@
+
+
+.errorMessage{
+    background-color: #d9534f;
+    color: white;
+    font-weight: bold;
+    padding: 0px 20px;
+    line-height: 4;
+    
+    -moz-animation: cssAnimation 0s ease-in 5s forwards;
+    /* Firefox */
+    -webkit-animation: cssAnimation 0s ease-in 5s forwards;
+    /* Safari and Chrome */
+    -o-animation: cssAnimation 0s ease-in 5s forwards;
+    /* Opera */
+    animation: cssAnimation 0s ease-in 5s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+
+.formError {
+    color: white;
+    background-color: #d9534f;
+    font-weight: bold;
+    margin-top: -20px;
+    
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  @keyframes cssAnimation {
+    0%   {opacity: 1;}
+    90%  {opacity: 1;}
+    100% {opacity: 0;}
+}
+@-webkit-keyframes cssAnimation {
+    0%   {opacity: 1;}
+    90%  {opacity: 1;}
+    100% {opacity: 0;}
+}

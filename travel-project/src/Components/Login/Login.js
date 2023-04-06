@@ -1,7 +1,8 @@
+import { Navigate, useNavigate } from "react-router";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useForm } from "../../hooks/useForm";
 
-import styles from '../Register/Register.module.css'
+import styles from './Login.module.css'
 
 const LoginFormKeys = {
   Email: 'email',
@@ -10,28 +11,40 @@ const LoginFormKeys = {
 
 export const Login = () => {
 
-  const {onLoginSubmit} = useAuthContext();
+  let {onLoginSubmit, error} = useAuthContext();
   const {values, formErrors, changeHandler, onSubmit, validateForm} = useForm({
     [LoginFormKeys.Email]: '',
     [LoginFormKeys.Password]: ''
   }, onLoginSubmit)
+  const navigate = useNavigate()
 
   const isEnabled = !Object.keys(formErrors).some(x => formErrors[x]);
+
+
+  // function hideLoadingDiv() {
+  //   setTimeout(function(){
+  //     console.log("timeout started")
+  //     const box =  document.getElementsByClassName('errorMessage')
+  //     box.style.visibility = 'hidden';
+  //   },2000)
+  // }
+
+  // if (error) {
+  //   hideLoadingDiv()
+  // }
 
     return (
         <section id="contact" className="login-section">
 
         <div id="contact-content">
             <div className="section-heading">
-                <h1>Login at<br/><em>Photo community</em></h1>
-                {/* <p>Curabitur hendrerit mauris mollis ipsum vulputate rutrum. 
-                <br/>Phasellus luctus odio eget dui imperdiet.</p> */}
-                
+                <h1>Login at<br/><em>Travel</em>BLOG</h1>         
             </div>
+            {error && <p className={styles.errorMessage}>An error occured while authenticating: {error.message}</p>}
             <div className="section-content">
                 <form id="login" method="POST" onSubmit={onSubmit}>
                     <div className="row">
-                        <div className="col-md-8">
+                        <div className="col-md-12">
                           <fieldset>
                             <input 
                               type="text"  
@@ -40,6 +53,7 @@ export const Login = () => {
                               onChange={changeHandler}
                               className="form-control" 
                               onBlur={validateForm}
+                              required
                               />
                                 {formErrors.email && 
                                     <p className={styles.formError}>
@@ -49,10 +63,10 @@ export const Login = () => {
                           </fieldset>
                         </div>
 
-                        <div className="col-md-8">
+                        <div className="col-md-12">
                           <fieldset>
                             <input 
-                              type="password" id="password" placeholder="Type in your password..." required=""
+                              type="password" id="password" placeholder="Type in your password..." required
                               name={LoginFormKeys.Password}
                               value={values[LoginFormKeys.Password]}
                               onChange={changeHandler}
@@ -63,7 +77,7 @@ export const Login = () => {
                         </div>
 
 
-                        <div className="col-md-8">
+                        <div className="col-md-12">
                           <fieldset>
                             <button type="submit" id="form-submit" className="btn" disabled={!isEnabled}>Login</button>
                           </fieldset>
