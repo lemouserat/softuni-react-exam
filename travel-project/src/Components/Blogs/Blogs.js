@@ -12,7 +12,8 @@ export const Blogs = () => {
         <section id="blog" className="content-section">
         <div className="section-heading">
             <h1>Blog<br/><em>Entries</em></h1>
-            <p>A list of all posted blog entries.</p>
+            <p>See what our other users saw, feel what they felt!
+            <br/>Here is a list of all posted blog entries.</p>
         </div>
         <div className="section-content">
             <div className="tabs-content">

@@ -1,8 +1,10 @@
+import { createContext } from "react";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useBlogContext } from "../../contexts/BlogContext";
 import { useForm } from "../../hooks/useForm";
+import { countries } from "../common/countriesData";
 
-import styles from '../Register/Register.module.css'
+import styles from './AddBlog.module.css'
 
 
 
@@ -26,9 +28,9 @@ export const AddBlog = () => {
 
         <div id="contact-content">
             <div className="section-heading">
-                <h1>Add your<br/><em>blog post</em></h1>
-                <p>Curabitur hendrerit mauris mollis ipsum vulputate rutrum. 
-                <br/>Phasellus luctus odio eget dui imperdiet.</p>
+                <h1>Add your<br/><em>Blog post</em></h1>
+                <p>Let the other users see what you saw, feel what you felt!
+                <br/>Add a pictoresque image and write down a compelling story. </p>
                 
             </div>
             <div className="section-content">
@@ -36,7 +38,7 @@ export const AddBlog = () => {
                     <div className="row">
                         <div className="col-md-12">
                           <fieldset>
-                            <input name="title" type="text" className="form-control" id="title" placeholder="Title..." required 
+                            <input name="title" type="text" className="form-control" id="title" placeholder="Write a title..." required 
                               value={values.title} 
                               onChange={changeHandler}
                               onBlur={validateForm}
@@ -50,17 +52,31 @@ export const AddBlog = () => {
                         </div>
                         <div className="col-md-6">
                           <fieldset>
-                            <input name="country" type="text" className="form-control" id="country" placeholder="Country..." required value={values.country} onChange={changeHandler}/>
+                            {/* <input name="country" type="text" className="form-control" id="country" placeholder="Country..." required value={values.country} onChange={changeHandler}/> */}
+                                <select name="country"  id="country" 
+                                  value={values.country} 
+                                  onChange={changeHandler}
+                                  required
+                                  className={styles.countryDropdownWhole }
+                                  >
+                                  <option>Select the country</option>
+                                 
+                                    {countries.map(c => (
+                                      <option key={c.code} >{c.name}</option>
+                                    ))}
+                                
+                                  
+                                </select>
                           </fieldset>
                         </div>
                          <div className="col-md-6">
                           <fieldset>
-                            <input name="city" type="text" className="form-control" id="city" placeholder="City..." value={values.city} onChange={changeHandler}/>
+                            <input name="city" type="text" className="form-control" id="city" placeholder="Add a city if possible..." value={values.city} onChange={changeHandler}/>
                           </fieldset>
                         </div>
                         <div className="col-md-12">
                           <fieldset>
-                            <input name="blogPhotoUrl" type="text" className="form-control" id="blogPhotoUrl" placeholder="Photo url..." 
+                            <input name="blogPhotoUrl" type="text" className="form-control" id="blogPhotoUrl" placeholder="Paste a photo url..." 
                               value={values.blogPhotoUrl} 
                               onChange={changeHandler} required
                               onBlur={validateForm}

@@ -41,8 +41,8 @@ export const MyProfile = () => {
         <section id="blog" className="content-section">
         <div className="section-heading">
             <h1>My profile<br/><em>{userEmail}</em></h1>
-            <p>Curabitur hendrerit mauris mollis ipsum vulputate rutrum. 
-            <br/>Phasellus luctus odio eget dui imperdiet.</p>
+            <p>This is your own personal space.
+            <br/>You will find all your blog posts and a list of all your comments.</p>
         </div>
         <div className="section-content">
             <div className="tabs-content">
