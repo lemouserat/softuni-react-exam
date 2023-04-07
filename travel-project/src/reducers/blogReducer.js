@@ -38,23 +38,23 @@ export const blogReducer = (state, action) => {
                     }
                 ],
             };
-            case 'RECOMMENDATION_DELETE':
-                return {
-                    ...state,
-                        recommendations: [
-                        ...state.recommendations,
-                        {
-                            ...action.payload,
-                        },
+            // case 'RECOMMENDATION_DELETE':
+            //     return {
+            //         ...state,
+            //             recommendations: [
+            //             ...state.recommendations,
+            //             {
+            //                 ...action.payload,
+            //             },
                         
-                    ],
-                }  
-                // case 'RECOMMENDATION_DELETE':
-                //     return {
-                //         ...state,
-                //         recommendations: state.recommendations.filter(recommendation => recommendation._id !== action.payload)
+            //         ],
+            //     }  
+                case 'RECOMMENDATION_DELETE':
+                    return {
+                        ...state,
+                        recommendations: state.recommendations.filter(recommendation => recommendation._id !== action.payload)
                        
-                //     }            
+                    }            
         default:
             return state;
     }

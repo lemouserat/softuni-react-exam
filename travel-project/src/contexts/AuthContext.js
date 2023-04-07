@@ -13,6 +13,7 @@ export const AuthProvider = ({
     children
 }) => {
     const [auth, setAuth] = useLocalStorage('auth', {});
+    //Sync state to local storage so that it persists through a page refresh. 
     const navigate = useNavigate();
 
     const authService = authServiceFactory(auth.accessToken)
@@ -28,7 +29,6 @@ export const AuthProvider = ({
 
             navigate('/blogs');
         } catch (error) {
-            console.log('There is an authentication problem');
             console.log(error);
             setError(error)
             
@@ -45,10 +45,9 @@ export const AuthProvider = ({
         try {
             const result = await authService.register(registerData)
             setAuth(result)
-            console.log(`Register - ${result}`)
+           
             navigate('/blogs')
         } catch (error) {
-            console.log('There is an authentication problem - connection');
             setError(error)
         }
     }

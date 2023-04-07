@@ -34,9 +34,7 @@ export const useForm = (initialValues, onSubmitHandler) => {
         const errors = {};
         let passwordToCheck = ''
 
-        console.log(values.password)
-        console.log(passwordToCheck)
-        console.log(value)
+ 
 
      
 

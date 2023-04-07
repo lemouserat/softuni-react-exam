@@ -63,7 +63,7 @@ export const BlogPostDetails = () => {
 
 const handleClickDelete = (id) => {
 setShow(true)
-console.log(id)
+
 }
 
  const handleClose = () => {
@@ -106,22 +106,13 @@ console.log(id)
         const recommendationId = recommendation._id
 
         await recommendationService.deleteRecommendation(recommendationId);
-         blog.recommendations.length--
-        navigate(`/blogs/${blogId}`)
+            //      blog.recommendations.length--
+    //     navigate(`/blogs/${blogId}`)
+        dispatch({
+            type: 'RECOMMENDATION_DELETE',
+            payload: recommendationId,
+        })
     }
-
-    // const onRecommendationDelete = async () => {
-
-    //     const recommendation = (blog.recommendations?.find(x => x._ownerId === userId))
-    //     const recommendationId = recommendation._id
-
-    //     await recommendationService.deleteRecommendation(recommendationId);
-
-    //     dispatch({
-    //         type: 'RECOMMENDATION_DELETETE',
-    //         payload: recommendationId,
-    //     })
-    // }
 
 
 

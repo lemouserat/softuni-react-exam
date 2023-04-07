@@ -14,7 +14,7 @@ Not logged in users can see the following views:
 * Login
 * Register
 * Blogs
-    * Only the static information about a blog 
+    * Only the static information about a blog. 
 * Gallery
 
 Logged in users can benefit from the full functionality of the website.
@@ -39,7 +39,7 @@ Everything starts with adding a blog post. You can add your blog post through th
 * Country - required. 
 * City - not required as sometimes the story from the blog post might have happened not in a particular city.
 * Photo url - required. Paste a valid URL with an image from the place that you visited.
-* Story - required. Even if you're not a writer you can write at least 10 characters. 
+* Story - Even if you're not a writer you can write at least 10 characters. 
 
 ## Blogs
 

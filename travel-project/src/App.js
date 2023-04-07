@@ -1,5 +1,4 @@
 import { Header } from './Components/Header/Header';
-import { Footer } from './Components/Footer/Footer';
 import { Gallery } from './Components/Gallery/Gallery';
 import { Home } from './Components/Home/Home';
 import { Route, Routes } from 'react-router-dom';

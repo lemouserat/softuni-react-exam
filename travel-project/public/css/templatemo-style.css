@@ -338,9 +338,9 @@ header {
   top: 60%;
   right: 120px;
   display: inline-block;
-  background-color: rgba(150, 126, 48, 0.6);
+  /* background-color: rgba(173, 156, 98, 0.4); */
   padding: 20px;
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 .Modern-Slider .info h1 {

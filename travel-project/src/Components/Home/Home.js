@@ -16,9 +16,7 @@ export const Home = () => {
                  <CarouselHome />
                 <div className="info">
                     <div>
-                      <h1>Travel Blog Project<br/>by Anastas</h1>
-                      {/* <p>Gaze upon the finest photography work out there.<br/>
-                          Please share our site link to your friends.</p> */}
+                      <h1>Travel Blog Project</h1>
                       <div className="white-button button">
                           <a href="/login">Log in</a>
                       </div>

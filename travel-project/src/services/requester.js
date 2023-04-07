@@ -34,8 +34,7 @@ const requester = async (method, url, data) => {
     const result = await response.json();
 
     if (!response.ok) {
-        console.log(`Problems with server: ${result}`)
-        console.log(`Problems with server: ${response}`)
+  
         throw result;
         
     }

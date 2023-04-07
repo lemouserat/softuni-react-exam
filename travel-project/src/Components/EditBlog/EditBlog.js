@@ -5,7 +5,9 @@ import { useForm } from "../../hooks/useForm";
 import { useService } from "../../hooks/useService";
 import { blogServiceFactory } from "../../services/blogService";
 
-import styles from '../Register/Register.module.css'
+import { countries } from "../common/countriesData";
+
+import styles from './EditBlog.module.css'
 
 
 export const EditBlog = () => {
@@ -67,16 +69,19 @@ export const EditBlog = () => {
                         </div>
                         <div className="col-md-6">
                           <fieldset>
-                            <input 
-                                name="country" 
-                                type="text" 
-                                className="form-control" 
-                                id="country" 
-                                placeholder="Country..." 
-                                value={values.country} 
-                                onChange={changeHandler}
-                                required
-                            />
+
+                              <select name="country"  id="country" 
+                                  value={values.country} 
+                                  onChange={changeHandler}
+                                  required
+                                  className={styles.countryDropdownWhole }
+                                  >
+                                  <option>Select the country</option>
+                                 
+                                    {countries.map(c => (
+                                      <option key={c.code} >{c.name}</option>
+                                    ))}
+                                </select>
                           </fieldset>
                         </div>
                          <div className="col-md-6">
@@ -89,7 +94,7 @@ export const EditBlog = () => {
                                 placeholder="City..." 
                                 value={values.city} 
                                 onChange={changeHandler} 
-                                required
+                                
                             />
                           </fieldset>
                         </div>

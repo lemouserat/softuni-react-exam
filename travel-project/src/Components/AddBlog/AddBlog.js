@@ -52,7 +52,6 @@ export const AddBlog = () => {
                         </div>
                         <div className="col-md-6">
                           <fieldset>
-                            {/* <input name="country" type="text" className="form-control" id="country" placeholder="Country..." required value={values.country} onChange={changeHandler}/> */}
                                 <select name="country"  id="country" 
                                   value={values.country} 
                                   onChange={changeHandler}
@@ -71,7 +70,10 @@ export const AddBlog = () => {
                         </div>
                          <div className="col-md-6">
                           <fieldset>
-                            <input name="city" type="text" className="form-control" id="city" placeholder="Add a city if possible..." value={values.city} onChange={changeHandler}/>
+                            <input name="city" type="text" className="form-control" id="city" placeholder="Add a city if relevant..." 
+                              value={values.city} 
+                              onChange={changeHandler}
+                            />
                           </fieldset>
                         </div>
                         <div className="col-md-12">
@@ -90,16 +92,10 @@ export const AddBlog = () => {
                         </div>
                         <div className="col-md-12">
                           <fieldset>
-                            <textarea name="story" rows="3" className="form-control" id="story" placeholder="Share a short story with us..." required
+                            <textarea name="story" rows="3" className="form-control" id="story" placeholder="Share a short story with us..." 
                               value={values.story} 
                               onChange={changeHandler} 
-                              onBlur={validateForm}
                               ></textarea>
-                                  {formErrors.story && 
-                                    <p className={styles.formError}>
-                                  {formErrors.story}
-                                    </p>
-                                } 
                           </fieldset>
                         </div>
                         <div className="col-md-12">
