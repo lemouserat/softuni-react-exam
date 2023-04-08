@@ -14,6 +14,7 @@ import { Logout } from './Components/Logout/Logout';
 import { RouteGuard } from './Components/common/RouteGuard';
 import { BlogOwner } from './Components/common/BlogOwner';
 import { MyProfile } from './Components/MyProfile/MyProfile';
+import { AboutUs } from './Components/AboutUs/AboutUs';
 
 
 function App() {
@@ -30,7 +31,6 @@ function App() {
                 <Route path='/register' element={<Register/>} /> 
                 <Route path='/blogs' element={<Blogs/>} /> 
                 <Route path='/blogs/:blogId' element={<BlogPostDetails />} />
-
                 <Route element={<RouteGuard/>}>
                     <Route path='/add-blog' element={<AddBlog/>} /> 
                     <Route path='/blogs/:blogId/edit' element={
@@ -40,6 +40,7 @@ function App() {
                     } />
                     <Route path='/logout' element={<Logout/>} />
                     <Route path='/my-profile' element={<MyProfile/>} /> 
+                    <Route path='/about-us' element={<AboutUs/>}/>
                 </Route>
                 </Routes> 
             </BlogProvider>

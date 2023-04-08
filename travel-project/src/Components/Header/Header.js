@@ -1,83 +1,94 @@
-import { useContext } from "react"
-import { Link } from "react-router-dom"
-import { AuthContext } from "../../contexts/AuthContext"
+import { useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export const Header = () => {
+  const { isAuthenticated, userEmail } = useContext(AuthContext);
 
-    const {isAuthenticated, userEmail} = useContext(AuthContext)
-
-    return (
-        <>
-            <div className="sidebar-navigation hidde-sm hidden-xs">
+  return (
+    <>
+      <div className="sidebar-navigation hidde-sm hidden-xs">
         <div className="logo">
-            <Link to="/">Travel<em>blog</em></Link>
+          <Link to="/">
+            Travel<em>blog</em>
+          </Link>
         </div>
         <nav>
-            <ul>
+          <ul>
+            <li>
+              <NavLink to="/">
+                <span className="rect"></span>
+                <span className="circle"></span>
+                Home{" "}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/blogs">
+                <span className="rect"></span>
+                <span className="circle"></span>
+                Blogs{" "}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/gallery">
+                <span className="rect"></span>
+                <span className="circle"></span>
+                Gallery{" "}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/about-us">
+                <span className="rect"></span>
+                <span className="circle"></span>
+                About us{" "}
+              </NavLink>
+            </li>
+            {!isAuthenticated && (
+              <>
                 <li>
-                    <Link to="/">
-                        <span className="rect"></span>
-                        <span className="circle"></span>
-                        Home </Link>
+                  <NavLink to="/login">
+                    <span className="rect"></span>
+                    <span className="circle"></span>
+                    Login{" "}
+                  </NavLink>
                 </li>
                 <li>
-                    <Link to="/gallery">
-                        <span className="rect"></span>
-                        <span className="circle"></span>
-                        Gallery </Link>
+                  <NavLink to="/register">
+                    <span className="rect"></span>
+                    <span className="circle"></span>
+                    Register{" "}
+                  </NavLink>
+                </li>
+              </>
+            )}
+            {isAuthenticated && (
+              <>
+                <li>
+                  <NavLink to="/add-blog">
+                    <span className="rect"></span>
+                    <span className="circle"></span>
+                    Add Blog post{" "}
+                  </NavLink>
                 </li>
                 <li>
-                    <Link to="/blogs">
-                        <span className="rect"></span>
-                        <span className="circle"></span>
-                        Blogs </Link>
-                </li>
-                {!isAuthenticated && (
-                    <>
-                        <li>
-                            <Link to="/login">
-                                <span className="rect"></span>
-                                <span className="circle"></span>
-                                Login </Link>
-                        </li>
-                        <li>
-                            <Link to="/register">
-                                <span className="rect"></span>
-                                <span className="circle"></span>
-                                Register </Link>
-                        </li>
-                    </>
-                )}
-
-
-                {isAuthenticated && (
-                    <>
-                <li>
-                    <Link to="/add-blog">
-                        <span className="rect"></span>
-                        <span className="circle"></span>
-                        Add Blog post </Link>
+                  <NavLink to="/my-profile">
+                    <span className="rect"></span>
+                    <span className="circle"></span>
+                    My profile - {userEmail}{" "}
+                  </NavLink>
                 </li>
                 <li>
-                    <Link to="/my-profile">
-                        <span className="rect"></span>
-                        <span className="circle"></span>
-                        My profile - {userEmail} </Link>
+                  <NavLink to="/logout">
+                    <span className="rect"></span>
+                    <span className="circle"></span>
+                    Logout{" "}
+                  </NavLink>
                 </li>
-                <li>
-                    <Link to="/logout">
-                        <span className="rect"></span>
-                        <span className="circle"></span>
-                        Logout </Link>
-                </li>
-                    </>
-                )}
-            </ul>
+              </>
+            )}
+          </ul>
         </nav>
-
-    </div>
-        </>
-
-    
-    )
-}
+      </div>
+    </>
+  );
+};

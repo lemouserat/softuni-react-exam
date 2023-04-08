@@ -1,5 +1,7 @@
 # softuni-react-exam - Travel Blog Project by Anastas
 
+Frontend is deployed at https://travel-blog-react-exam.web.app/ but server is not due to Victor's advise. 
+
 A Travel blog single page application app built on ReactJS with educational purposes.
 Users can upload blogs with stories from their travels around the world.
 They can post comments and recommend places visited by other users.

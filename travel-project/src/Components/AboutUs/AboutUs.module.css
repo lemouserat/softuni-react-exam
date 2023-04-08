@@ -1,0 +1,15 @@
+.infoSectionH {
+    background-color: #45489a;
+    color: white;
+    padding:  10px 0px;
+}
+
+.infoSectionP {
+    text-align: left;
+    font-size: 16px;
+}
+
+
+.infoSectionP:last-child {
+    margin-bottom: 20px;
+}

@@ -1,40 +1,38 @@
 import { requestFactory } from "./requester";
 
-const baseUrl = 'http://localhost:3030/data/blogs'
+const baseUrl = "http://localhost:3030/data/blogs";
 
 export const blogServiceFactory = (token) => {
-    const request = requestFactory(token)
+  const request = requestFactory(token);
 
-    const getAllBlogs = async () => {
-        const result = await request.get(baseUrl);
-        const blogs = Object.values(result);
+  const getAllBlogs = async () => {
+    const result = await request.get(baseUrl);
+    const blogs = Object.values(result);
 
-        return blogs
-    }
+    return blogs;
+  };
 
-    const getOneBlog = async (blogId) => {
-        const result = await request.get(`${baseUrl}/${blogId}`)
+  const getOneBlog = async (blogId) => {
+    const result = await request.get(`${baseUrl}/${blogId}`);
 
-        return result;
-    }
+    return result;
+  };
 
-    const createBlog = async (blogData) => {
-        const result = await request.post(baseUrl, blogData);
-    
-       
-        return result;
-    };
+  const createBlog = async (blogData) => {
+    const result = await request.post(baseUrl, blogData);
 
-    const editBlog = (blogId, data) => request.put(`${baseUrl}/${blogId}`, data)
+    return result;
+  };
 
-     const deleteBlog = (blogId) => request.delete(`${baseUrl}/${blogId}`)
+  const editBlog = (blogId, data) => request.put(`${baseUrl}/${blogId}`, data);
 
+  const deleteBlog = (blogId) => request.delete(`${baseUrl}/${blogId}`);
 
-    return {
-        getAllBlogs,
-        getOneBlog,
-        createBlog,
-        editBlog,
-        delete: deleteBlog,
-    }
-}
+  return {
+    getAllBlogs,
+    getOneBlog,
+    createBlog,
+    editBlog,
+    delete: deleteBlog,
+  };
+};
